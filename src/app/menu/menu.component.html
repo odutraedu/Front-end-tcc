@@ -1,0 +1,41 @@
+<div class="title-bar">
+  <h1 class="center-title">CalmaMente</h1>
+</div>
+<div class="sidebar" [class.open]="sidebarOpen">
+  <div class="sidebar-user" *ngIf="isLoggedIn && userName">
+    <span class="profile-icon">👤</span>
+    <span class="sidebar-user-name">{{ userName }}</span>
+  </div>
+  <ul>
+    <li><a routerLink="/home" (click)="closeSidebar()">Início</a></li>
+    <li><a routerLink="/diario" (click)="closeSidebar()">Diário</a></li>
+    <li>
+      <a routerLink="/conteudo-educacional" (click)="closeSidebar()"
+        >Conteúdo Educacional</a
+      >
+    </li>
+    <li>
+      <a routerLink="/dashboard" (click)="closeSidebar()">Dashboard</a>
+    </li>
+    <li *ngIf="!isLoggedIn">
+      <a routerLink="/login" (click)="closeSidebar()">Login</a>
+    </li>
+  </ul>
+  <div class="sidebar-footer">
+    <a
+      *ngIf="isLoggedIn"
+      routerLink="/cadastro"
+      (click)="preencherCadastroComUsuarioLogado(); closeSidebar()"
+      class="profile-link"
+    >
+      <span class="profile-icon">👤</span> Meu Perfil
+    </a>
+    <button *ngIf="isLoggedIn" class="logout-button" (click)="logout()">
+      Sair
+    </button>
+  </div>
+</div>
+<button class="menu-toggle" (click)="toggleSidebar()">☰</button>
+<main [class.sidebar-opened]="sidebarOpen">
+  <ng-content></ng-content>
+</main>
